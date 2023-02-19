@@ -12,7 +12,6 @@ import java.util.ArrayList;
  * First public key uses in the constructor is the account id
  */
 @Data
-@RequiredArgsConstructor
 public class Account {
     @NonNull
     private String accountId;
