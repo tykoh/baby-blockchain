@@ -19,6 +19,12 @@ public class Account {
     private ArrayList<String> publicKeys;
     private Balance[] balances;
 
+    // add constructor to add a public key
+    public Account(String initialPublicKey) {
+        this.accountId = initialPublicKey;
+        addPublicKey(initialPublicKey);
+    }
+
     // add a public key to the account
     public void addPublicKey(String publicKey) {
         if (publicKeys == null) {
