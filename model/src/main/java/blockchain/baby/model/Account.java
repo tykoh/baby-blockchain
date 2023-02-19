@@ -1,6 +1,10 @@
 package blockchain.baby.model;
 
 import lombok.Data;
+import lombok.NonNull;
+import lombok.RequiredArgsConstructor;
+
+import java.util.ArrayList;
 
 /**
  * An account in the blockchain.
@@ -8,8 +12,18 @@ import lombok.Data;
  * First public key uses in the constructor is the account id
  */
 @Data
+@RequiredArgsConstructor
 public class Account {
+    @NonNull
     private String accountId;
-    private String[] publicKeys;
+    private ArrayList<String> publicKeys;
     private Balance[] balances;
+
+    // add a public key to the account
+    public void addPublicKey(String publicKey) {
+        if (publicKeys == null) {
+            publicKeys = new ArrayList<>();
+        }
+        publicKeys.add(publicKey);
+    }
 }
