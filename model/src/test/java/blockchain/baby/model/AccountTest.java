@@ -2,6 +2,8 @@ package blockchain.baby.model;
 
 import org.junit.jupiter.api.Test;
 
+import java.nio.charset.StandardCharsets;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 /**
@@ -14,37 +16,37 @@ import static org.junit.jupiter.api.Assertions.*;
 class AccountTest {
 
         @Test
-        void createAccountWithPublicKey() {
-            String publicKey = "publicKey";
+        void createAccountWithPublicKey() throws Exception{
+            byte[] publicKey = "publicKey".getBytes("UTF-8");
             Account account = new Account(publicKey);
             assertNotNull(account);
             assertEquals(publicKey, account.getAccountId());
         }
 
         @Test
-        void createAccountWithPublicKeyAndAddAnotherPublicKey() {
-            String publicKey = "publicKey";
+        void createAccountWithPublicKeyAndAddAnotherPublicKey() throws Exception {
+            byte[] publicKey = "publicKey".getBytes(StandardCharsets.UTF_8);
             Account account = new Account(publicKey);
             assertNotNull(account);
             assertEquals(publicKey, account.getAccountId());
 
-            String anotherPublicKey = "anotherPublicKey";
+            byte[] anotherPublicKey = "anotherPublicKey".getBytes(StandardCharsets.UTF_8);
             account.addPublicKey(anotherPublicKey);
             assertEquals(publicKey, account.getAccountId());
         }
 
         @Test
         void createAccountWithPublicKeyAndAddTwoMorePublicKeys() {
-            String publicKey = "publicKey";
+            byte[] publicKey = "publicKey".getBytes(StandardCharsets.UTF_8);
             Account account = new Account(publicKey);
             assertNotNull(account);
             assertEquals(publicKey, account.getAccountId());
 
-            String anotherPublicKey = "anotherPublicKey";
+            byte[] anotherPublicKey = "anotherPublicKey".getBytes(StandardCharsets.UTF_8);
             account.addPublicKey(anotherPublicKey);
             assertEquals(publicKey, account.getAccountId());
 
-            String anotherPublicKey2 = "anotherPublicKey2";
+            byte[] anotherPublicKey2 = "anotherPublicKey2".getBytes(StandardCharsets.UTF_8);
             account.addPublicKey(anotherPublicKey2);
             assertEquals(publicKey, account.getAccountId());
 

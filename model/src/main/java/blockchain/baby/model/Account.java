@@ -1,8 +1,10 @@
 package blockchain.baby.model;
 
+import blockchain.baby.util.HexConverter;
 import lombok.Data;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
+import org.bouncycastle.util.encoders.Hex;
 
 import java.util.ArrayList;
 
@@ -14,18 +16,18 @@ import java.util.ArrayList;
 @Data
 public class Account {
     @NonNull
-    private String accountId;
-    private ArrayList<String> publicKeys;
+    private byte[] accountId;
+    private ArrayList<byte[]> publicKeys;
     private Balance[] balances;
 
     // add constructor to add a public key
-    public Account(String initialPublicKey) {
-        this.accountId = initialPublicKey;
+    public Account(byte[] initialPublicKey) {
+        accountId = initialPublicKey;
         addPublicKey(initialPublicKey);
     }
 
     // add a public key to the account
-    public void addPublicKey(String publicKey) {
+    public void addPublicKey(byte[] publicKey) {
         if (publicKeys == null) {
             publicKeys = new ArrayList<>();
         }
