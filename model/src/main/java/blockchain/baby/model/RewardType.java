@@ -1,6 +1,8 @@
 package blockchain.baby.model;
 
 import lombok.Data;
+import blockchain.baby.security.SignatureGenerator;
+import java.security.PrivateKey;
 
 /**
  * Reward type that an organisation can issue.
@@ -11,7 +13,29 @@ import lombok.Data;
 @Data
 public class RewardType {
     private String name;
-    private String code;
+    /**
+     * 2 bytes, unique code for this reward type.
+     */
+    private byte[] code;
     private String description;
-    private String fingerprint;
+    /**
+     * 8 bytes, using organisation private key, to sign 2 bytes of code.
+     */
+    private byte[] fingerprint;
+
+    /**
+     * Contructor, takes in code, name and description.
+     */
+    public RewardType(byte[] code, String name, String description) {
+        this.code = code;
+        this.name = name;
+        this.description = description;
+    }
+
+    /**
+     * Sign code with private key of the issuing organisation.
+     */
+    public void sign(PrivateKey privateKey) throws Exception{
+        this.fingerprint = SignatureGenerator.generate(privateKey, code);
+    }
 }
