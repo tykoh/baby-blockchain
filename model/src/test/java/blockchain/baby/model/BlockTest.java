@@ -79,6 +79,17 @@ class BlockTest {
         assertEquals(32, newBlock.getPreviousHash().length);
         assertEquals(32, newBlock.getHash().length);
         assertEquals(3, newBlock.getTransactions().length);
+
+        // verify that hash changes if previous block hash changes
+        byte[] originalNewBlockHash = newBlock.getHash();
+        System.out.println("Original new block hash:" + HexConverter.bytesToHex(originalNewBlockHash));
+        System.out.println("Original new block previous hash:" + HexConverter.bytesToHex(newBlock.getPreviousHash()));
+        newBlock.setPreviousHash(new byte[32]);
+        System.out.println("Change new block previous hash:" + HexConverter.bytesToHex(newBlock.getPreviousHash()));
+        newBlock.calculateHash();
+        System.out.println("Recalculated new block hash:" + HexConverter.bytesToHex(newBlock.getHash()));
+        System.out.println("Block hash changed? " + !HexConverter.bytesToHex(originalNewBlockHash).equals(HexConverter.bytesToHex(newBlock.getHash())));
+        assertNotEquals(originalNewBlockHash, newBlock.getHash());
     }
 
 }

@@ -15,11 +15,11 @@ import java.security.NoSuchAlgorithmException;
 public class Block {
     private int index;
     /**
-     * 32 bytes - SHA256 from previous block
+     * 32 bytes - hash from previous block
      */
     private byte[] previousHash;
     /**
-     * 32 bytes - SHA256(XOR of all transaction signatures + timestamp + nonce)
+     * 32 bytes - SHA256(previous hash + XOR of all transaction signatures + timestamp + nonce)
      */
     private byte[] hash;
     private long timestamp;
@@ -62,7 +62,7 @@ public class Block {
 
     /**
      * Return hash in hex string format.
-     * where hash = SHA256(XOR of all transaction signatures + timestamp + nonce)
+     * where hash = SHA256(previous hash + XOR of all transaction signatures + timestamp + nonce)
      */
     public void calculateHash() throws NoSuchAlgorithmException {
         // hash = SHA256(XOR of all transaction signatures)
@@ -73,13 +73,17 @@ public class Block {
                 workingHash[i] ^= signature[i];
             }
         }
-        // hash = sha256(workingHash + timestamp + nonce)
+        // hash = sha256(previousHash + workingHash + timestamp + nonce)
+
         byte[] timestampBytes = Long.toString(timestamp).getBytes();
         byte[] nonceBytes = Integer.toString(nonce).getBytes();
-        byte[] input = new byte[workingHash.length + timestampBytes.length + nonceBytes.length];
-        System.arraycopy(workingHash, 0, input, 0, workingHash.length);
-        System.arraycopy(timestampBytes, 0, input, workingHash.length, timestampBytes.length);
-        System.arraycopy(nonceBytes, 0, input, workingHash.length + timestampBytes.length, nonceBytes.length);
+        byte[] input = new byte[previousHash.length + workingHash.length + timestampBytes.length + nonceBytes.length];
+
+        System.arraycopy(previousHash, 0, input, 0, previousHash.length);
+        System.arraycopy(workingHash, 0, input, previousHash.length, workingHash.length);
+        System.arraycopy(timestampBytes, 0, input, previousHash.length + workingHash.length, timestampBytes.length);
+        System.arraycopy(nonceBytes, 0, input, previousHash.length + workingHash.length + timestampBytes.length, nonceBytes.length);
+
         this.hash = Sha256Generator.generate(input);
     }
 
