@@ -1,5 +1,6 @@
 package blockchain.baby.model;
 
+import blockchain.baby.util.HexConverter;
 import lombok.Data;
 import blockchain.baby.security.SignatureGenerator;
 
@@ -96,6 +97,23 @@ public class Transaction {
      */
     public boolean verifySignature(PublicKey publicKey) {
         return SignatureGenerator.verifySignature(publicKey, signature, getSignData());
+    }
+
+    /**
+     * return string representation of transaction
+     * convert bytes field to hex string
+     */
+    @Override
+    public String toString() {
+        return "Transaction{" +
+                "txnType=" + txnType +
+                ", from=" + HexConverter.bytesToHex(from) +
+                ", to=" + HexConverter.bytesToHex(to) +
+                ", rewardTypeCode=" + HexConverter.bytesToHex(rewardTypeCode) +
+                ", rewardTypeFingerprint=" + HexConverter.bytesToHex(rewardTypeFingerprint) +
+                ", amount=" + HexConverter.bytesToHex(amount) +
+                ", signature=" + HexConverter.bytesToHex(signature) +
+                '}';
     }
 
 
