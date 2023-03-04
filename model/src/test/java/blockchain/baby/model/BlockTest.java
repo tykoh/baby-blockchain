@@ -10,9 +10,8 @@ import static org.junit.jupiter.api.Assertions.*;
  * Test class for Block
  * Test cases:
  * 1. Generate genesis block
- * 2. Generate hash for genesis block
- * 3. Generate new block with previous block and transactions
- * 4. Generate hash for new block
+ * 2. Generate new block with previous block and transactions
+ *
  */
 class BlockTest {
 
