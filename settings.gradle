@@ -1,0 +1,2 @@
+rootProject.name = 'babyBlockchain'
+include 'model', 'node'

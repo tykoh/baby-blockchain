@@ -1,5 +1,7 @@
 plugins {
     id 'java'
+    id 'org.springframework.boot' version '3.0.4'
+    id 'io.spring.dependency-management' version '1.1.0'
 }
 
 group 'blockchain.baby'
@@ -10,8 +12,7 @@ repositories {
 }
 
 dependencies {
-    // https://mvnrepository.com/artifact/org.bouncycastle/bcprov-jdk15on
-    // add lombok depedenency
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
     implementation 'org.projectlombok:lombok:1.18.20'
     annotationProcessor 'org.projectlombok:lombok:1.18.20'
     implementation 'org.bouncycastle:bcprov-jdk15on:1.70'

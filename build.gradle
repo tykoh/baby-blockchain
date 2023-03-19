@@ -1,0 +1,35 @@
+// Define the common settings for both projects
+subprojects {
+    apply plugin: 'java'
+    repositories {
+        mavenCentral()
+    }
+}
+
+
+// Define the model project
+project(':model') {
+//    dependencies {
+//
+//        implementation 'org.projectlombok:lombok:1.18.20'
+//        implementation 'org.bouncycastle:bcprov-jdk15on:1.70'
+//        annotationProcessor 'org.projectlombok:lombok:1.18.20'
+//        testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.1'
+//        testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.8.1'
+//    }
+}
+
+// Define the Spring Web MVC project
+project(':node') {
+    /*dependencies {
+        // Add the model project as a dependency
+        implementation project(':model')
+        implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+        implementation 'org.springframework.boot:spring-boot-starter-web'
+        runtimeOnly 'org.xerial:sqlite-jdbc:3.36.0.3'
+        compileOnly 'org.projectlombok:lombok'
+        annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
+        annotationProcessor 'org.projectlombok:lombok'
+        testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    }*/
+}
